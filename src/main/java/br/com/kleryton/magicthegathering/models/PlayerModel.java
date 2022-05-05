@@ -17,7 +17,7 @@ import javax.persistence.Table;
 //informa que esta classe é uma entidade
 @Entity
 @Table(name = "TB_CARDS")
-public class Player implements Serializable {
+public class PlayerModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -29,6 +29,6 @@ public class Player implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "player_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_cards"))
-	private Set<Cards> cards;
+	private Set<CardsModel> cards;
 
 }

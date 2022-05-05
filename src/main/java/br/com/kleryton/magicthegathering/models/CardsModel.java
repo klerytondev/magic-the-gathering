@@ -16,7 +16,7 @@ import br.com.kleryton.magicthegathering.models.enums.languageEnum;
 //informa que esta classe é uma entidade
 @Entity
 @Table(name = "TB_CARDS")
-public class Cards implements Serializable {
+public class CardsModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,17 +34,17 @@ public class Cards implements Serializable {
 	private languageEnum language;
 
 	@Column(name = "foil", nullable = false)
-	private Double foil;
+	private Boolean foil;
 
 	@Column(name = "price", nullable = false)
 	private Double price;
 
 	private Double totalCards;
 
-	public Cards() {
+	public CardsModel() {
 	}
 
-	public Cards(String name, String edition, languageEnum language, Double foil, Double price, Double totalCards) {
+	public CardsModel(String name, String edition, languageEnum language, Boolean foil, Double price, Double totalCards) {
 		super();
 		this.name = name;
 		this.edition = edition;
@@ -82,11 +82,11 @@ public class Cards implements Serializable {
 		this.language = language;
 	}
 
-	public Double getFoil() {
+	public Boolean getFoil() {
 		return foil;
 	}
 
-	public void setFoil(Double foil) {
+	public void setFoil(Boolean foil) {
 		this.foil = foil;
 	}
 
@@ -94,7 +94,7 @@ public class Cards implements Serializable {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
