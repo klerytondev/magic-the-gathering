@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import br.com.kleryton.magicthegathering.models.enums.FoilEnum;
 import br.com.kleryton.magicthegathering.models.enums.languageEnum;
 
-//informa que esta classe é uma entidade
 @Entity
 @Table(name = "TB_CARDS")
 public class CardsModel implements Serializable {
@@ -24,7 +23,7 @@ public class CardsModel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name-card", nullable = false)
+	@Column(name = "name_card", nullable = true)
 	private String name;
 
 	@Column(name = "edition", nullable = false)
@@ -39,14 +38,15 @@ public class CardsModel implements Serializable {
 
 	@Column(name = "price", nullable = false)
 	private Double price;
-	
-	@Column(name = "total-cards", nullable = false)
+
+	@Column(name = "total_cards", nullable = false)
 	private Integer totalCards;
 
 	public CardsModel() {
 	}
 
-	public CardsModel(String name, String edition, languageEnum language, FoilEnum foil, Double price, Integer totalCards) {
+	public CardsModel(String name, String edition, languageEnum language, FoilEnum foil, Double price,
+			Integer totalCards) {
 		super();
 		this.name = name;
 		this.edition = edition;

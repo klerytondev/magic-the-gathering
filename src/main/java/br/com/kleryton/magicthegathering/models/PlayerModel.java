@@ -14,21 +14,53 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-//informa que esta classe é uma entidade
 @Entity
-@Table(name = "TB_CARDS")
+@Table(name = "TB_PLAYER")
 public class PlayerModel implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "name-player", nullable = false)
+
+	@Column(name = "name_player", nullable = false)
 	private String name;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "player_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_cards"))
+	@JoinColumn(name = "player_id", foreignKey = @ForeignKey(name = "fk_cards"))
 	private Set<CardsModel> cards;
+
+	public PlayerModel() {
+	}
+
+	public PlayerModel(Long id, String name) {
+		super();
+		this.id  = id;
+		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id  = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<CardsModel> getCards() {
+		return cards;
+	}
+
+	public void setCards(Set<CardsModel> cards) {
+		this.cards = cards;
+	}
 
 }
