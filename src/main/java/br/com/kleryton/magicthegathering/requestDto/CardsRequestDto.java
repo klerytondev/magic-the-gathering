@@ -26,10 +26,10 @@ public class CardsRequestDto {
 	@Pattern(regexp = "SIM|NAO", message = "campo.foil.valores}")
 	private FoilEnum foil;
 
-	@PositiveOrZero(message = "{campo.positiveorzero.postivo}")
+	@PositiveOrZero(message = "{campo.pricePositiveorzero.postivo}")
 	private Double price;
 
-	@PositiveOrZero(message = "{campo.positiveorzero.postivo}")
+	@PositiveOrZero(message = "{campo.totalPositiveorzero.postivo}")
 	@NotEmpty(message = "{campo.totalcards.obrigatorio}")
 	private Integer totalCards;
 
