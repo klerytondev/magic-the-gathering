@@ -1,0 +1,6 @@
+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+   +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
+ |M| |a| |g| |i| |c|   |T| |h| |e|   |G| |a| |t| |h| |e| |r| |i| |n| |g|
+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+   +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
+                                                                                                                                                                                       
+${application.Banking-System} ${application.v1.00}
+Powered by Kleryton Souza ${spring-boot.v2.6.3}
