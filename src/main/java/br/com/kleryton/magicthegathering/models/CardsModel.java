@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.kleryton.magicthegathering.models.enums.FoilEnum;
 import br.com.kleryton.magicthegathering.models.enums.languageEnum;
 
 //informa que esta classe é uma entidade
@@ -34,17 +35,17 @@ public class CardsModel implements Serializable {
 	private languageEnum language;
 
 	@Column(name = "foil", nullable = false)
-	private Boolean foil;
+	private FoilEnum foil;
 
 	@Column(name = "price", nullable = false)
 	private Double price;
 
-	private Double totalCards;
+	private Integer totalCards;
 
 	public CardsModel() {
 	}
 
-	public CardsModel(String name, String edition, languageEnum language, Boolean foil, Double price, Double totalCards) {
+	public CardsModel(String name, String edition, languageEnum language, FoilEnum foil, Double price, Integer totalCards) {
 		super();
 		this.name = name;
 		this.edition = edition;
@@ -82,11 +83,11 @@ public class CardsModel implements Serializable {
 		this.language = language;
 	}
 
-	public Boolean getFoil() {
+	public FoilEnum getFoil() {
 		return foil;
 	}
 
-	public void setFoil(Boolean foil) {
+	public void setFoil(FoilEnum foil) {
 		this.foil = foil;
 	}
 
@@ -98,11 +99,11 @@ public class CardsModel implements Serializable {
 		this.price = price;
 	}
 
-	public Double getTotalCards() {
+	public Integer getTotalCards() {
 		return totalCards;
 	}
 
-	public void setTotalCards(Double totalCards) {
+	public void setTotalCards(Integer totalCards) {
 		this.totalCards = totalCards;
 	}
 
