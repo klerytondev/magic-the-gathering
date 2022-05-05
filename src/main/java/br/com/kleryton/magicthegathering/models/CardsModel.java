@@ -31,15 +31,16 @@ public class CardsModel implements Serializable {
 	private String edition;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "language", nullable = false)
+	@Column(nullable = false)
 	private languageEnum language;
 
-	@Column(name = "foil", nullable = false)
+	@Column(nullable = false)
 	private FoilEnum foil;
 
 	@Column(name = "price", nullable = false)
 	private Double price;
-
+	
+	@Column(name = "total-cards", nullable = false)
 	private Integer totalCards;
 
 	public CardsModel() {
