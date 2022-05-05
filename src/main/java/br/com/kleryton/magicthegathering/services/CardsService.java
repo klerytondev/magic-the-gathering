@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import br.com.kleryton.bankingsystem.models.AccountModel;
-import br.com.kleryton.bankingsystem.requestDto.AccountRequestDto;
-import br.com.kleryton.bankingsystem.responseDto.AccountResponseDto;
-import br.com.kleryton.bankingsystem.services.exceptions.IntegridadeDeDadosException;
 import br.com.kleryton.magicthegathering.models.CardsModel;
 import br.com.kleryton.magicthegathering.repositories.CardsRepository;
 import br.com.kleryton.magicthegathering.requestDto.CardsRequestDto;
@@ -71,35 +67,33 @@ public class CardsService {
 		cardsRepository.deleteById(id);
 		return "Card deleted successfully.";
 	}
-	
+
 	// Update by id
-		@Transactional
-		public AccountResponseDto updateAcoount(Long id, AccountRequestDto accountRequestDto) {
+	@Transactional
+	public Optional<CardsModel> updateAcoount(Long id, CardsRequestDto cardsRequestDto) {
 
-			// Busca no banco de dados se existe account com o id passado
-			Optional<AccountModel> accountModelOptional = accountRepository.findById(id);
-			accountModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Account not found."));
+		// Busca no banco de dados se existe account com o id passado
+		Optional<CardsModel> cardModelOptional = cardsRepository.findById(id);
+		cardModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Card not found."));
 
-			// Atualiza os campos da account existentes
+		// Atualiza o campo price da card
 
-			accountModelOptional.get().setNameOwner(accountRequestDto.getNameOwner());
-			accountModelOptional.get().setAgencyCode(accountRequestDto.getAgencyCode());
-			accountModelOptional.get().setAccountCode(accountRequestDto.getAccountCode());
-			accountModelOptional.get().setVerificationDigital(accountRequestDto.getVerificationDigital());
-			accountModelOptional.get().setRegisterId(accountRequestDto.getRegisterId());
+		cardModelOptional.get().setPrice(cardsRequestDto.getPrice());
 
-			// Verifica se accountCode ou RegisteId já está em uso no banco
-			try {
-				accountRepository.save(accountModelOptional.get());
-			} catch (Exception e) {
-				throw new DataIntegrityViolationException("accoundCode or RegisterId is already in use!");
-			}
+//		CardsResponseDto cardsResponseDto = convertModelToDTO(cardModelOptional.get());
 
-			AccountResponseDto accountResponseDto = convertModelToDTO(accountModelOptional.get());
+		return cardModelOptional;
 
-			return accountResponseDto;
+	}
 
-		}
+	// Coverte uma card em uma response DTO
+//	public CardsResponseDto convertModelToDTO(CardsModel cardsModel) {
+//
+//		CardsResponseDto cardsResponseDto = new CardsResponseDto(cardsModel);
+//		accountModel.setCard(accountModel.getCard());
+//
+//		return accountResponseDto;
+//	}
 
 	// Coverte um request DTO em Card
 	public CardsModel convertDtoToModel(CardsRequestDto cardsRequestDto) {

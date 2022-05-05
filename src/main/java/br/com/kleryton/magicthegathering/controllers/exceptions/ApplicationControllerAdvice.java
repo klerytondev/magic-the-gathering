@@ -10,9 +10,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.kleryton.bankingsystem.services.exceptions.ConflictDeDadosException;
-import br.com.kleryton.bankingsystem.services.exceptions.IntegridadeDeDadosException;
-import br.com.kleryton.bankingsystem.services.exceptions.ObjetoNaoEncontradoException;
+import br.com.kleryton.magicthegathering.services.exceptions.ConflictDeDadosException;
+import br.com.kleryton.magicthegathering.services.exceptions.IntegridadeDeDadosException;
+import br.com.kleryton.magicthegathering.services.exceptions.ObjetoNaoEncontradoException;
 
 //Anotação que permite tratar exceções em toda a aplicação de forma global
 @ControllerAdvice
