@@ -39,7 +39,7 @@ public class CardsModel implements Serializable {
 	@Column(name = "price", nullable = false)
 	private Double price;
 
-	@Column(name = "total_cards", nullable = false)
+	@Column(name = "total_cards")
 	private Integer totalCards;
 
 	public CardsModel() {
@@ -54,10 +54,15 @@ public class CardsModel implements Serializable {
 		this.foil = foil;
 		this.price = price;
 		this.totalCards = totalCards;
+
 	}
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -96,7 +101,7 @@ public class CardsModel implements Serializable {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

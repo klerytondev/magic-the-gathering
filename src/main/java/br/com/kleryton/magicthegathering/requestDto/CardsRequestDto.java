@@ -22,7 +22,7 @@ public class CardsRequestDto {
 	private String edition;
 
 	private languageEnum language;
-	
+
 	@Pattern(regexp = "SIM|NAO", message = "campo.foil.valores}")
 	private FoilEnum foil;
 

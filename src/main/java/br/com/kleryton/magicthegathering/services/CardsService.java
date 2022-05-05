@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import br.com.kleryton.magicthegathering.models.CardsList;
 import br.com.kleryton.magicthegathering.models.CardsModel;
+import br.com.kleryton.magicthegathering.repositories.CardsListRepository;
 import br.com.kleryton.magicthegathering.repositories.CardsRepository;
 import br.com.kleryton.magicthegathering.requestDto.CardsRequestDto;
 import br.com.kleryton.magicthegathering.services.exceptions.ConflictDeDadosException;
@@ -22,19 +24,33 @@ public class CardsService {
 	@Autowired
 	CardsRepository cardsRepository;
 
+	@Autowired
+	CardsListRepository cardsListRepository;
+
+	// Create list cards
 	@Transactional
-	// Create card
-	public CardsModel create(CardsRequestDto cardsRequestDto) {
+	public CardsList createCard(CardsRequestDto cardsRequestDto, Long id) {
 
-		CardsModel cardsModel = convertDtoToModel(cardsRequestDto);
+		// Verifica se a lista de cards existe no banco
+		Optional<CardsList> cardListOptional = cardsListRepository.findById(id);
+		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
 
-		// Verifica se accountCode ou RegisteId já está em uso no banco
+		// Converte o cardsRequestDto em um CardsModel
+		CardsModel cardModelPersist = new CardsModel();
+		cardModelPersist = convertDtoToModel(cardsRequestDto);
+
+		// Seta um card na lista de cards
+		cardListOptional.get().setCards(cardModelPersist);
+
+		CardsList cardsListPersist;
+
+		// Verifica se o card já possui na lista
 		try {
-			cardsRepository.save(cardsModel);
+			cardsListPersist = cardsListRepository.save(cardListOptional.get());
 		} catch (DataIntegrityViolationException e) {
 			throw new ConflictDeDadosException("Card is already in use!");
 		}
-		return cardsModel;
+		return cardsListPersist;
 	}
 
 	// Read All
