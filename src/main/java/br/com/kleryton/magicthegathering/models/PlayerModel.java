@@ -25,7 +25,7 @@ public class PlayerModel implements Serializable {
 
 	@Column(name = "name_player", nullable = false)
 	private String name;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "player_id", foreignKey = @ForeignKey(name = "fk_cardsList"))
 	private List<CardsList> cardsList;
@@ -53,6 +53,14 @@ public class PlayerModel implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<CardsList> getCardsList() {
+		return cardsList;
+	}
+
+	public void setCardsList(CardsList cardsList) {
+		this.cardsList.add(cardsList);
 	}
 
 }

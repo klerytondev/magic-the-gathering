@@ -1,21 +1,23 @@
 package br.com.kleryton.magicthegathering.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.kleryton.magicthegathering.models.CardsList;
 import br.com.kleryton.magicthegathering.models.CardsModel;
+import br.com.kleryton.magicthegathering.models.PlayerModel;
 import br.com.kleryton.magicthegathering.repositories.CardsListRepository;
 import br.com.kleryton.magicthegathering.repositories.CardsRepository;
+import br.com.kleryton.magicthegathering.repositories.PlayerRepository;
 import br.com.kleryton.magicthegathering.requestDto.CardsRequestDto;
-import br.com.kleryton.magicthegathering.services.exceptions.ConflictDeDadosException;
 import br.com.kleryton.magicthegathering.services.exceptions.ObjetoNaoEncontradoException;
 
 @Service
@@ -27,12 +29,19 @@ public class CardsService {
 	@Autowired
 	CardsListRepository cardsListRepository;
 
+	@Autowired
+	PlayerRepository playerRepository;
+
 	// Create list cards
 	@Transactional
-	public CardsList createCard(CardsRequestDto cardsRequestDto, Long id) {
+	public PlayerModel createCard(CardsRequestDto cardsRequestDto, Long id, Long idPlayer) {
 
 		// Verifica se a lista de cards existe no banco
 		Optional<CardsList> cardListOptional = cardsListRepository.findById(id);
+		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
+
+		// Verifica se o player existe no banco
+		Optional<PlayerModel> playerModelOptional = playerRepository.findById(idPlayer);
 		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
 
 		// Converte o cardsRequestDto em um CardsModel
@@ -42,31 +51,54 @@ public class CardsService {
 		// Seta um card na lista de cards
 		cardListOptional.get().setCards(cardModelPersist);
 
-		CardsList cardsListPersist;
+		// Seta uma Lista de cards e um player
+		playerModelOptional.get().setCardsList(cardListOptional.get());
 
-		// Verifica se o card já possui na lista
-		try {
-			cardsListPersist = cardsListRepository.save(cardListOptional.get());
-		} catch (DataIntegrityViolationException e) {
-			throw new ConflictDeDadosException("Card is already in use!");
-		}
-		return cardsListPersist;
+		PlayerModel playerModelPersist = playerRepository.save(playerModelOptional.get());
+
+		return playerModelPersist;
 	}
 
-	// Read All
+	// Read All Order
 	@Transactional
-	public List<CardsModel> findAll() {
+	public List<CardsModel> getAllCardsToCardsById(Long id) {
+		CardsList cardsList;
+		// Verifica se existe conta no banco de dados com o id passado
+		try {
+			cardsList = getAccountModelById(id);
+		} catch (Exception e) {
+			throw new ObjetoNaoEncontradoException("List cards not found by id.");
+		}
+		// Seta card de cards passada em uma lista de cards
+		List<CardsModel> cards = cardsList.getCards();
+		// Verifica se a lista de cards está vazia
+		if (cards.isEmpty())
+			throw new ObjetoNaoEncontradoException("Card not found by CardList.");
 
-		// Verifica se existe cards no banco, caso contrario retorna exception
-		if (cardsRepository.findAll().isEmpty()) {
-			throw new ObjetoNaoEncontradoException("Cards not found!");
+		List<CardsModel> listCards = new ArrayList<>(cards);
+		Collections.sort(listCards, Comparator.comparing(CardsModel::getName));
+		return listCards;
+	}
+
+	// Read All Price
+	@Transactional
+	public List<CardsModel> getAllCardsToCardsPrice(Long id) {
+		CardsList cardsList;
+		// Verifica se existe conta no banco de dados com o id passado
+		try {
+			cardsList = getAccountModelById(id);
+		} catch (Exception e) {
+			throw new ObjetoNaoEncontradoException("List cards not found by id.");
 		}
-		// Salva Cards existentes no banco de dados em uma lista de cards
-		List<CardsModel> cardsModelsList = new ArrayList<>();
-		for (CardsModel cardsModel : cardsRepository.findAll()) {
-			cardsModelsList.add(cardsModel);
-		}
-		return cardsModelsList;
+		// Seta card de cards passada em uma lista de cards
+		List<CardsModel> cards = cardsList.getCards();
+		// Verifica se a lista de cards está vazia
+		if (cards.isEmpty())
+			throw new ObjetoNaoEncontradoException("Card not found by CardList.");
+
+		List<CardsModel> listCards = new ArrayList<>(cards);
+		Collections.sort(listCards, Comparator.comparing(CardsModel::getPrice));
+		return listCards;
 	}
 
 	// Delete by id
@@ -100,6 +132,15 @@ public class CardsService {
 
 		return cardModelOptional;
 
+	}
+
+	@Transactional
+	protected CardsList getAccountModelById(Long id) {
+
+		// Verifica se existe uma account no banco de dados
+		Optional<CardsList> cardListOptional = cardsListRepository.findById(id);
+		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
+		return cardListOptional.get();
 	}
 
 	// Coverte uma card em uma response DTO
