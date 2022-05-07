@@ -1,7 +1,6 @@
 package br.com.kleryton.magicthegathering.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,18 +60,18 @@ public class CardsController {
 		return ResponseEntity.status(HttpStatus.OK).body(cardModels);
 	}
 
-//	// Delete One By id
-//	@ApiOperation(value = "Deleta um cartão de uma conta de acordo com o id(cartão) passado")
-//	@DeleteMapping("/cards/delete")
-//	public ResponseEntity<Object> DeletecardModel(@RequestParam("id") Long id) {
-//		Boolean cardDelete = cardService.deleteCard(id);
-//		if (cardDelete == true) {
-//			return ResponseEntity.status(HttpStatus.OK).body("Card deleted successfully");
-//		}
-//		return ResponseEntity.status(HttpStatus.OK).body("Could not delete card");
-//	}
-//
-//	// Update By id
+	// Delete One By id
+	@ApiOperation(value = "Deleta uma carta de uma lista de acordo com o id(carta) passado")
+	@DeleteMapping("/cards/delete/idPlayer")
+	public ResponseEntity<Object> DeletecardModel(@RequestParam("id") Long id, @PathVariable Long idPlayer) {
+		Boolean cardDelete = cardsService.deleteCard(id, idPlayer);
+		if (cardDelete == true) {
+			return ResponseEntity.status(HttpStatus.OK).body("Card deleted successfully");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("Could not delete card");
+	}
+
+	// Update By id
 	@ApiOperation(value = "Atualiza um cartão de uma conta de acordo com o id(cartão) passado")
 	@PutMapping("/cards/update/idPlayer")
 	public ResponseEntity<CardsModel> updateCardsModel(@RequestParam("id") Long id,

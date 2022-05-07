@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.kleryton.bankingsystem.models.CardModel;
 import br.com.kleryton.magicthegathering.models.CardsList;
 import br.com.kleryton.magicthegathering.models.CardsModel;
 import br.com.kleryton.magicthegathering.models.PlayerModel;
@@ -103,17 +104,14 @@ public class CardsService {
 
 	// Delete by id
 	@Transactional
-	public String delete(Long id) {
+	public Boolean deleteCard(Long id, Long idPlayer) {
 
+		// Verifica se existe card com o id passado no banco de dados
 		Optional<CardsModel> cardsModelOptional = cardsRepository.findById(id);
-
-		// Verifica se card existe
-		if (!cardsModelOptional.isPresent()) {
-			throw new ObjetoNaoEncontradoException("Card not found.");
-		}
-
-		cardsRepository.deleteById(id);
-		return "Card deleted successfully.";
+		cardsModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Card not found."));
+		// Caso exista, o card é deletado
+		cardsRepository.delete(cardsModelOptional.get());
+		return true;
 	}
 
 	// Update by id
