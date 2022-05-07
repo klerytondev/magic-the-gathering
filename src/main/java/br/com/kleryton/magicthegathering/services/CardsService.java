@@ -42,7 +42,7 @@ public class CardsService {
 
 		// Verifica se o player existe no banco
 		Optional<PlayerModel> playerModelOptional = playerRepository.findById(idPlayer);
-		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
+		playerModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Player not found."));
 
 		// Converte o cardsRequestDto em um CardsModel
 		CardsModel cardModelPersist = new CardsModel();
@@ -118,19 +118,21 @@ public class CardsService {
 
 	// Update by id
 	@Transactional
-	public Optional<CardsModel> updateAcoount(Long id, CardsRequestDto cardsRequestDto) {
+	public CardsModel cardUpdate(Long id, CardsRequestDto cardsRequestDto, Long idPlayer) {
 
-		// Busca no banco de dados se existe account com o id passado
+		// Busca no banco de dados se existe card com o id passado
 		Optional<CardsModel> cardModelOptional = cardsRepository.findById(id);
 		cardModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Card not found."));
+
+		// Verifica se o player existe no banco
+		Optional<PlayerModel> playerModelOptional = playerRepository.findById(idPlayer);
+		playerModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Player not found."));
 
 		// Atualiza o campo price da card
 
 		cardModelOptional.get().setPrice(cardsRequestDto.getPrice());
 
-//		CardsResponseDto cardsResponseDto = convertModelToDTO(cardModelOptional.get());
-
-		return cardModelOptional;
+		return cardModelOptional.get();
 
 	}
 

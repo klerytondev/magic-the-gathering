@@ -1,6 +1,7 @@
 package br.com.kleryton.magicthegathering.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.kleryton.magicthegathering.models.CardsModel;
@@ -69,12 +72,12 @@ public class CardsController {
 //	}
 //
 //	// Update By id
-//	@ApiOperation(value = "Atualiza um cartão de uma conta de acordo com o id(cartão) passado")
-//	@PutMapping("/cards/update")
-//	public ResponseEntity<CardModel> updateCardModel(@RequestParam("id") Long id,
-//			@RequestBody @Valid CardRequestDto cardRequestDto) {
-//		CardModel cardModel = cardService.updateCard(id, cardRequestDto);
-//		return ResponseEntity.status(HttpStatus.OK).body(cardModel);
-//	}
+	@ApiOperation(value = "Atualiza um cartão de uma conta de acordo com o id(cartão) passado")
+	@PutMapping("/cards/update/idPlayer")
+	public ResponseEntity<CardsModel> updateCardsModel(@RequestParam("id") Long id,
+			@RequestBody @Valid CardsRequestDto cardsRequestDto, @PathVariable Long idPlayer) {
+		CardsModel cardsModel = cardsService.cardUpdate(id, cardsRequestDto, idPlayer);
+		return ResponseEntity.status(HttpStatus.OK).body(cardsModel);
+	}
 
 }
