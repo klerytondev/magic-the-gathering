@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_CARDSlIST")
-public class CardsList {
+public class CardList {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,10 @@ public class CardsList {
 	@JoinColumn(name = "cards_id", foreignKey = @ForeignKey(name = "fk_cards"))
 	private List<CardsModel> cards;
 
-	public CardsList() {
+	public CardList() {
 	}
 
-	public CardsList(List<CardsModel> cards) {
+	public CardList(List<CardsModel> cards) {
 		super();
 		this.cards = cards;
 	}

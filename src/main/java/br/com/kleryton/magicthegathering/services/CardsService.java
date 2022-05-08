@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.kleryton.magicthegathering.models.CardsList;
+import br.com.kleryton.magicthegathering.models.CardList;
 import br.com.kleryton.magicthegathering.models.CardsModel;
 import br.com.kleryton.magicthegathering.models.PlayerModel;
 import br.com.kleryton.magicthegathering.repositories.CardsListRepository;
@@ -37,7 +37,7 @@ public class CardsService {
 	public PlayerModel createCard(CardsRequestDto cardsRequestDto, Long id, Long idPlayer) {
 
 		// Verifica se a lista de cards existe no banco
-		Optional<CardsList> cardListOptional = cardsListRepository.findById(id);
+		Optional<CardList> cardListOptional = cardsListRepository.findById(id);
 		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
 
 		// Verifica se o player existe no banco
@@ -62,7 +62,7 @@ public class CardsService {
 	// Read All Order
 	@Transactional
 	public List<CardsModel> getAllCardsToCardsById(Long id) {
-		CardsList cardsList;
+		CardList cardsList;
 		// Verifica se existe conta no banco de dados com o id passado
 		try {
 			cardsList = getAccountModelById(id);
@@ -83,7 +83,7 @@ public class CardsService {
 	// Read All Price
 	@Transactional
 	public List<CardsModel> getAllCardsToCardsPrice(Long id) {
-		CardsList cardsList;
+		CardList cardsList;
 		// Verifica se existe conta no banco de dados com o id passado
 		try {
 			cardsList = getAccountModelById(id);
@@ -134,10 +134,10 @@ public class CardsService {
 	}
 
 	@Transactional
-	protected CardsList getAccountModelById(Long id) {
+	protected CardList getAccountModelById(Long id) {
 
 		// Verifica se existe uma account no banco de dados
-		Optional<CardsList> cardListOptional = cardsListRepository.findById(id);
+		Optional<CardList> cardListOptional = cardsListRepository.findById(id);
 		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
 		return cardListOptional.get();
 	}
