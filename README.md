@@ -45,18 +45,18 @@ spring.jpa.show-sql=true
 6. CI/CD CodePipeline - AWS
 
 ### funcionalidades
-- [x] Gerenciamento de banco
+- [ ] Gerenciamento de banco
 - [x] Gerenciamento de cardsListModel
 - [x] Gerenciamento de cardsModel
-- [x] Gerenciamento de playerModel
+- [ ] Gerenciamento de playerModel
 - [X] Validações
 - [x] Documentação Swagger
 - [x] Tratamento de exceções
-- [x] Deploy project on AWS
+- [x] Deploy project on Heroku
 
 ### Status do Projeto
 <h4 align="left"> 
-	🚧  React Select 🚀 ready  🚧
+	🚧  React Select 🚀 in production 🚧
 </h4>
 
 ### Autor
