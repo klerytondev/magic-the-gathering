@@ -9,7 +9,7 @@ de vida e seu objetivo é jogar as magias para que os pontos de vida dos oponent
 4. Gerenciamento de playerModel (CRUD completo)
 
 # Documentação
-*  A documentação da API foi gerada com Swagger e está disponível em ``` http://banking-system.c13poqgk7bdd.us-east-1.rds.amazonaws.com/swagger-ui.html```
+*  A documentação da API foi gerada com Swagger e está disponível em ```https://kleryton-magic-the-gathering.herokuapp.com//swagger-ui.html```
 
 # Pré-requisitos
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
