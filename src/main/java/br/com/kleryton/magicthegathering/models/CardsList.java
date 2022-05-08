@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TB_CARDSlIST")
 public class CardsList {
 
 	@Id
@@ -28,6 +30,10 @@ public class CardsList {
 	public CardsList(List<CardsModel> cards) {
 		super();
 		this.cards = cards;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public List<CardsModel> getCards() {

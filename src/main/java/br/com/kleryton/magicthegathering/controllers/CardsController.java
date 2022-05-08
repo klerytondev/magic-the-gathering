@@ -36,7 +36,7 @@ public class CardsController {
 	CardsService cardsService;
 
 	// SaveCard
-	@ApiOperation(value = "Salva um novo card em uma lista de cards")
+	@ApiOperation(value = "Salva um novo card")
 	@PostMapping("/card/idCardList/idPlayer")
 	public ResponseEntity<Object> saveCard(@RequestBody @Valid CardsRequestDto cardsRequestDto,
 			@PathVariable Long idCardList, @PathVariable Long idPlayer) {
@@ -61,7 +61,7 @@ public class CardsController {
 	}
 
 	// Delete One By id
-	@ApiOperation(value = "Deleta uma carta de uma lista de acordo com o id(carta) passado")
+	@ApiOperation(value = "Deleta um card de uma lista de acordo com o id(carta) passado")
 	@DeleteMapping("/cards/delete/idPlayer")
 	public ResponseEntity<Object> DeletecardModel(@RequestParam("id") Long id, @PathVariable Long idPlayer) {
 		Boolean cardDelete = cardsService.deleteCard(id, idPlayer);
