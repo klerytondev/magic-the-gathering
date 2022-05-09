@@ -36,10 +36,6 @@ public class CardsService {
 	@Transactional
 	public PlayerModel createCard(CardsRequestDto cardsRequestDto, Long id, Long idPlayer) {
 
-		// Verifica se a lista de cards existe no banco
-		Optional<CardList> cardListOptional = cardsListRepository.findById(id);
-		cardListOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("List cards not found."));
-
 		// Verifica se o player existe no banco
 		Optional<PlayerModel> playerModelOptional = playerRepository.findById(idPlayer);
 		playerModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Player not found."));
@@ -48,8 +44,17 @@ public class CardsService {
 		CardsModel cardModelPersist = new CardsModel();
 		cardModelPersist = convertDtoToModel(cardsRequestDto);
 
-		// Seta um card na lista de cards
-		cardListOptional.get().setCards(cardModelPersist);
+		// Verifica se a lista de cards existe no banco
+		Optional<CardList> cardListOptional = cardsListRepository.findById(id);
+		if (!(cardListOptional.get() == null)) {
+			CardList cardList = new CardList();
+			// Seta um card na lista de cards
+			cardList.setCards(cardModelPersist);
+			cardListOptional = Optional.of(cardList);
+		} else {
+			// Seta um card na lista de cards
+			cardListOptional.get().setCards(cardModelPersist);
+		}
 
 		// Seta uma Lista de cards e um player
 		playerModelOptional.get().setCardsList(cardListOptional.get());
