@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.kleryton.magicthegathering.models.enums.FoilEnum;
-import br.com.kleryton.magicthegathering.models.enums.languageEnum;
+import br.com.kleryton.magicthegathering.models.enums.LanguageEnum;
 
 @Entity
 @Table(name = "TB_CARDS")
@@ -31,21 +31,22 @@ public class CardsModel implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private languageEnum language;
+	private LanguageEnum language;
 
+//	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private FoilEnum foil;
 
 	@Column(name = "price", nullable = false)
 	private Double price;
 
-	@Column(name = "total_cards")
-	private Integer totalCards;
+//	@Column(name = "total_cards")
+//	private Integer totalCards;
 
 	public CardsModel() {
 	}
 
-	public CardsModel(String name, String edition, languageEnum language, FoilEnum foil, Double price,
+	public CardsModel(String name, String edition, LanguageEnum language, FoilEnum foil, Double price,
 			Integer totalCards) {
 		super();
 		this.name = name;
@@ -53,7 +54,7 @@ public class CardsModel implements Serializable {
 		this.language = language;
 		this.foil = foil;
 		this.price = price;
-		this.totalCards = totalCards;
+//		this.totalCards = totalCards;
 
 	}
 
@@ -81,11 +82,11 @@ public class CardsModel implements Serializable {
 		this.edition = edition;
 	}
 
-	public languageEnum getLanguage() {
+	public LanguageEnum getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(languageEnum language) {
+	public void setLanguage(LanguageEnum language) {
 		this.language = language;
 	}
 
@@ -105,12 +106,12 @@ public class CardsModel implements Serializable {
 		this.price = price;
 	}
 
-	public Integer getTotalCards() {
-		return totalCards;
-	}
-
-	public void setTotalCards(Integer totalCards) {
-		this.totalCards = totalCards;
-	}
+//	public Integer getTotalCards() {
+//		return totalCards;
+//	}
+//
+//	public void setTotalCards(Integer totalCards) {
+//		this.totalCards = totalCards;
+//	}
 
 }

@@ -2,7 +2,7 @@ package br.com.kleryton.magicthegathering.CardsResponseDto;
 
 import br.com.kleryton.magicthegathering.models.CardsModel;
 import br.com.kleryton.magicthegathering.models.enums.FoilEnum;
-import br.com.kleryton.magicthegathering.models.enums.languageEnum;
+import br.com.kleryton.magicthegathering.models.enums.LanguageEnum;
 
 //Transferir atributos de resposta enviadas ao client
 public class CardsResponseDto {
@@ -10,7 +10,7 @@ public class CardsResponseDto {
 	private Long id;
 	private String name;
 	private String edition;
-	private languageEnum language;
+	private LanguageEnum language;
 	private FoilEnum foil;
 	private Double price;
 	private Integer totalCards;
@@ -25,7 +25,7 @@ public class CardsResponseDto {
 		this.language = cardsModel.getLanguage();
 		this.foil = cardsModel.getFoil();
 		this.price = cardsModel.getPrice();
-		this.totalCards = cardsModel.getTotalCards();
+//		this.totalCards = cardsModel.getTotalCards();
 	}
 
 	public Long getId() {
@@ -52,11 +52,11 @@ public class CardsResponseDto {
 		this.edition = edition;
 	}
 
-	public languageEnum getLanguage() {
+	public LanguageEnum getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(languageEnum language) {
+	public void setLanguage(LanguageEnum language) {
 		this.language = language;
 	}
 

@@ -4,7 +4,7 @@ import javax.validation.constraints.Pattern;
 
 public enum FoilEnum {
 
-	SIM("SIM"), NAO("NAO");
+	SIM("sim"), NAO("nao");
 
 	// @regex validar os possiveis tipos de foil
 	@Pattern(regexp = "SIM|NAO")

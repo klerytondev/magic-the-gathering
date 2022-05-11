@@ -2,15 +2,15 @@ package br.com.kleryton.magicthegathering.models.enums;
 
 import javax.validation.constraints.Pattern;
 
-public enum languageEnum {
+public enum LanguageEnum {
 
-	INGLÊS("ingles"), PORTUGUES("portugues"), JAPONES("japones");
+	INGLES("ingles"), PORTUGUES("portugues"), JAPONES("japones");
 
 	// @regex validar os possiveis tipos de indiomas
 	@Pattern(regexp = "INGLES|PORTUGES|JAPONES")
 	private String language;
 
-	private languageEnum(String language) {
+	private LanguageEnum(String language) {
 		this.language = language;
 	}
 
@@ -18,7 +18,7 @@ public enum languageEnum {
 		return language;
 	}
 
-	public void setIndioma(String language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 

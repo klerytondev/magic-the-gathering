@@ -1,14 +1,13 @@
 package br.com.kleryton.magicthegathering.requestDto;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Length;
 
 import br.com.kleryton.magicthegathering.models.CardsModel;
 import br.com.kleryton.magicthegathering.models.enums.FoilEnum;
-import br.com.kleryton.magicthegathering.models.enums.languageEnum;
+import br.com.kleryton.magicthegathering.models.enums.LanguageEnum;
 
 //Transferir e manipular atributos recebidos por parametro de Cards
 public class CardsRequestDto {
@@ -21,9 +20,8 @@ public class CardsRequestDto {
 	@Length(max = 30, message = "{campo.edition.caracteres}")
 	private String edition;
 
-	private languageEnum language;
+	private LanguageEnum language;
 
-	@Pattern(regexp = "SIM|NAO", message = "campo.foil.valores}")
 	private FoilEnum foil;
 
 	@PositiveOrZero(message = "{campo.pricePositiveorzero.postivo}")
@@ -56,11 +54,11 @@ public class CardsRequestDto {
 		this.edition = edition;
 	}
 
-	public languageEnum getLanguage() {
+	public LanguageEnum getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(languageEnum language) {
+	public void setLanguage(LanguageEnum language) {
 		this.language = language;
 	}
 
