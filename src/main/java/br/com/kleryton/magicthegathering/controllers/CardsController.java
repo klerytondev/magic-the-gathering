@@ -37,9 +37,9 @@ public class CardsController {
 
 	// SaveCard
 	@ApiOperation(value = "Salva um novo card")
-	@PostMapping("/card/idCardList/idPlayer")
+	@PostMapping("/card/{idCardList}/{idPlayer}")
 	public ResponseEntity<Object> saveCard(@RequestBody @Valid CardsRequestDto cardsRequestDto,
-			@PathVariable Long idCardList, @PathVariable Long idPlayer) {
+			@PathVariable (value = "idCardList") Long idCardList,@PathVariable (value = "idPlayer") Long idPlayer) {
 		PlayerModel playerModel = cardsService.createCard(cardsRequestDto, idCardList, idPlayer);
 		return ResponseEntity.status(HttpStatus.CREATED).body(playerModel);
 	}

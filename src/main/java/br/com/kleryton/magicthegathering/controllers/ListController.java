@@ -28,16 +28,15 @@ public class ListController {
 
 	@Autowired
 	CardsListRepository cardsListRepository;
-	
+
 	@Autowired
 	PlayerRepository playerRepository;
-	
 
 	// SaveList
 	@ApiOperation(value = "Salva uma nova lista")
 	@PostMapping("/cardList/{idPlayer}")
-	public ResponseEntity<String> saveList(@PathVariable (value = "idPlayer") Long idPlayer) {
-		
+	public ResponseEntity<String> saveList(@PathVariable(value = "idPlayer") Long idPlayer) {
+
 		// Verifica se o player existe no banco
 		Optional<PlayerModel> playerModelOptional = playerRepository.findById(idPlayer);
 		playerModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Player not found."));
@@ -45,7 +44,8 @@ public class ListController {
 		cardsListRepository.save(cardList);
 		playerModelOptional.get().setCardsList(cardList);
 		playerRepository.save(playerModelOptional.get());
-		return ResponseEntity.status(HttpStatus.CREATED).body("Lista de Cards criada com sucesso!: " + playerModelOptional.get());
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body("Lista de Cards criada com sucesso!: " + playerModelOptional.get());
 	}
 
 }
