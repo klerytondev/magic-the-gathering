@@ -19,7 +19,7 @@ public class CardList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cards_id", foreignKey = @ForeignKey(name = "fk_cards"))
 	private List<CardsModel> cards;
@@ -31,7 +31,7 @@ public class CardList {
 		super();
 		this.cards = cards;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -43,4 +43,10 @@ public class CardList {
 	public void setCards(CardsModel cards) {
 		this.cards.add(cards);
 	}
+
+	@Override
+	public String toString() {
+		return "CardList [id=" + id + ", cards=" + cards + "]";
+	}
+
 }

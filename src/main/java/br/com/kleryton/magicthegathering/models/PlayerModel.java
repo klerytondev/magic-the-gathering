@@ -63,4 +63,9 @@ public class PlayerModel implements Serializable {
 		this.cardsList.add(cardsList);
 	}
 
+	@Override
+	public String toString() {
+		return "Player [id=" + id + ", name=" + name + "]";
+	}
+	
 }

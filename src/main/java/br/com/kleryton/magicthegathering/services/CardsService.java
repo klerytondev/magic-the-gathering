@@ -65,7 +65,7 @@ public class CardsService {
 	@Transactional
 	public List<CardsModel> getAllCardsToCardsById(Long id) {
 		CardList cardsList;
-		// Verifica se existe conta no banco de dados com o id passado
+		// Verifica se o card existe conta no banco de dados com o id passado
 		try {
 			cardsList = getAccountModelById(id);
 		} catch (Exception e) {
@@ -162,8 +162,7 @@ public class CardsService {
 		cardsModel.setLanguage(cardsRequestDto.getLanguage());
 		cardsModel.setFoil(cardsRequestDto.getFoil());
 		cardsModel.setPrice(cardsRequestDto.getPrice());
-		cardsModel.setTotalCards(cardsRequestDto.getTotalCards());
-
+		
 		return cardsModel;
 	}
 }
