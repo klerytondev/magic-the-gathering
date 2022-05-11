@@ -47,13 +47,10 @@ public class CardsService {
 		// Verifica se a lista de cards existe no banco
 		Optional<CardList> cardListOptional = cardsListRepository.findById(id);
 		if (!(cardListOptional.get() == null)) {
-			CardList cardList = new CardList();
-			// Seta um card na lista de cards
-			cardList.setCards(cardModelPersist);
-			cardListOptional = Optional.of(cardList);
-		} else {
+
 			// Seta um card na lista de cards
 			cardListOptional.get().setCards(cardModelPersist);
+			playerModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("CardList not found."));
 		}
 
 		// Seta uma Lista de cards e um player
