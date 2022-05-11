@@ -30,9 +30,8 @@ public class ListController {
 	
 	// SaveList
 		@ApiOperation(value = "Salva uma novas lista")
-		@PostMapping("/card/idCardList/idPlayer")
-		public ResponseEntity<Object> saveCard(@RequestBody @Valid CardsRequestDto cardsRequestDto,
-				@PathVariable Long idCardList, @PathVariable Long idPlayer) {
+		@PostMapping("/card/CardList")
+		public ResponseEntity<Object> saveList(@RequestBody @Valid CardsRequestDto cardsRequestDto) {
 			PlayerModel playerModel = cardsService.createCard(cardsRequestDto, idCardList, idPlayer);
 			return ResponseEntity.status(HttpStatus.CREATED).body(playerModel);
 		}
