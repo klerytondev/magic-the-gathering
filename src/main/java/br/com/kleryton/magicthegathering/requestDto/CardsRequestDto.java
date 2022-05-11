@@ -29,10 +29,6 @@ public class CardsRequestDto {
 	@PositiveOrZero(message = "{campo.pricePositiveorzero.postivo}")
 	private Double price;
 
-	@PositiveOrZero(message = "{campo.totalPositiveorzero.postivo}")
-	@NotEmpty(message = "{campo.totalcards.obrigatorio}")
-	private Integer totalCards;
-
 	public CardsRequestDto() {
 	}
 
@@ -42,7 +38,6 @@ public class CardsRequestDto {
 		this.language = cardsModel.getLanguage();
 		this.foil = cardsModel.getFoil();
 		this.price = cardsModel.getPrice();
-		this.totalCards = cardsModel.getTotalCards();
 	}
 
 	public String getName() {
@@ -83,14 +78,6 @@ public class CardsRequestDto {
 
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public Integer getTotalCards() {
-		return totalCards;
-	}
-
-	public void setTotalCards(Integer totalCards) {
-		this.totalCards = totalCards;
 	}
 
 }
