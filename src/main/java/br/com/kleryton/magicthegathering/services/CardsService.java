@@ -32,14 +32,14 @@ public class CardsService {
 	@Autowired
 	PlayerRepository playerRepository;
 
-	// Create list cards
+	// Create card e seta em uma list
 	@Transactional
 	public PlayerModel createCard(CardsRequestDto cardsRequestDto, Long id, Long idPlayer) {
 
 		// Verifica se o player existe no banco
 		Optional<PlayerModel> playerModelOptional = playerRepository.findById(idPlayer);
 		playerModelOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Player not found."));
-
+		
 		// Converte o cardsRequestDto em um CardsModel
 		CardsModel cardModelPersist = new CardsModel();
 		cardModelPersist = convertDtoToModel(cardsRequestDto);

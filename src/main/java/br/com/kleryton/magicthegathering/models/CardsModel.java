@@ -33,7 +33,7 @@ public class CardsModel implements Serializable {
 	@Column(nullable = false)
 	private LanguageEnum language;
 
-//	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private FoilEnum foil;
 

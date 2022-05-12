@@ -21,7 +21,7 @@ public class CardList {
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cards_id", foreignKey = @ForeignKey(name = "fk_cards"))
+	@JoinColumn(name = "list_cards", foreignKey = @ForeignKey(name = "fk_cards"))
 	private List<CardsModel> cards;
 
 	public CardList() {

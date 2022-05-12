@@ -45,7 +45,7 @@ public class ListController {
 		playerModelOptional.get().setCardsList(cardList);
 		playerRepository.save(playerModelOptional.get());
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body("Lista de Cards criada com sucesso!: " + playerModelOptional.get());
+				.body("Lista de Cards criada com sucesso para: " + playerModelOptional.get());
 	}
 
 }

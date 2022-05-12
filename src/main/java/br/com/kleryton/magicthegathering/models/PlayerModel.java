@@ -2,6 +2,7 @@ package br.com.kleryton.magicthegathering.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ public class PlayerModel implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "player_id", foreignKey = @ForeignKey(name = "fk_cardsList"))
-	private List<CardList> cardsList;
+	private Set<CardList> cardsList;
 
 	public PlayerModel() {
 	}
@@ -55,7 +56,7 @@ public class PlayerModel implements Serializable {
 		this.name = name;
 	}
 
-	public List<CardList> getCardsList() {
+	public Set<CardList> getCardsList() {
 		return cardsList;
 	}
 
